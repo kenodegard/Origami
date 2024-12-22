@@ -591,8 +591,8 @@ class CreatePaneCommand(PaneCommand):
 
 
 class DestroyPaneCommand(PaneCommand):
-    def run(self, direction):
-        self.destroy_pane(direction)
+    def run(self, direction, only_on_empty=False):
+        self.destroy_pane(direction, only_on_empty)
 
 
 class ResizePaneCommand(PaneCommand):
