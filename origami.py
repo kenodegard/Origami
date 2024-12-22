@@ -595,6 +595,12 @@ class DestroyPaneCommand(PaneCommand):
         self.destroy_pane(direction, only_on_empty)
 
 
+class ClosePaneCommand(PaneCommand):
+    def run(self):
+        self.window.run_command("close")
+        self.destroy_current_pane(only_on_empty=True)
+
+
 class ResizePaneCommand(PaneCommand):
     def run(self, orientation, mode=None):
         if mode is None:
