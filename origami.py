@@ -432,7 +432,7 @@ class PaneCommand(sublime_plugin.WindowCommand):
             if give_focus:
                 self.travel_to_pane(direction, False, destroy_old_if_empty)
 
-    def destroy_current_pane(self):
+    def destroy_current_pane(self, only_on_empty=False):
         # Out of the four adjacent panes, one was split to create this pane.
         # Find out which one, move to it, then destroy this pane.
         cells = self.get_cells()
@@ -452,11 +452,11 @@ class PaneCommand(sublime_plugin.WindowCommand):
                     target_dir = dir
         if target_dir:
             self.travel_to_pane(target_dir)
-            self.destroy_pane(opposite_direction(target_dir))
+            self.destroy_pane(opposite_direction(target_dir), only_on_empty)
 
     def destroy_pane(self, direction, only_on_empty=False):
         if direction == "self":
-            self.destroy_current_pane()
+            self.destroy_current_pane(only_on_empty)
             return
 
         window = self.window
